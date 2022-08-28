@@ -1,10 +1,9 @@
-from turtle import right
 from django.db import models
 
 # Create your models here.
 class Test(models.Model):
     name = models.CharField(max_length=60)
-
+    
     def __str__(self) -> str:
         return str(self.name)
 
