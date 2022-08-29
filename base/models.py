@@ -69,7 +69,7 @@ class MyUser(AbstractBaseUser):
     date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    credits = models.PositiveIntegerField(default=100)
+    # credits = models.PositiveIntegerField(default=100)
     linkedin_token = models.TextField(blank=True, default='')
     expiry_date = models.DateTimeField(null=True, blank=True)
     objects = MyUserManager()
@@ -96,14 +96,14 @@ class MyUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-    @property
-    def is_out_of_credits(self):
-        "Is the user out  of credits?"
-        return self.credits > 0
+    # @property
+    # def is_out_of_credits(self):
+    #     "Is the user out  of credits?"
+    #     return self.credits > 0
 
-    @property
-    def has_sufficient_credits(self, cost):
-        return self.credits - cost >= 0
+    # @property
+    # def has_sufficient_credits(self, cost):
+    #     return self.credits - cost >= 0
 
     @property
     def linkedin_signed_in(self):
