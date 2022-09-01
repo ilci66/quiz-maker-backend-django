@@ -1,7 +1,7 @@
 # TODO: create RDF serializers using the models defined
 from dataclasses import fields
 from rest_framework import serializers
-from base.models import Test, Question, Answer, MyUser
+from base.models import Test, Question, Answer
 
 class TestSerializer(serializers.ModelSerializer):
     class Meta:

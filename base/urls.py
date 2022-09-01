@@ -1,7 +1,7 @@
 # TODO: create the urls here using rdf router
 from django.urls import include, path
 from rest_framework import routers
-from base.views import TestViewSet, QuestionViewSet, AnswerViewSet, RegistrationView, LoginView, LogoutView,ChangePasswordView
+from base.views import TestViewSet, QuestionViewSet, AnswerViewSet
 from rest_framework_simplejwt import views as jwt_views
 
 
