@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 'base', # might cause an error, not sure
     'rest_framework',
     'base.apps.BaseConfig', # Not sure about the necessity of this on here either
 ]
@@ -139,6 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+AUTH_USER_MODEL = 'base.NewUser'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

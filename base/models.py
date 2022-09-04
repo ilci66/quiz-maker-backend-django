@@ -29,6 +29,7 @@ class Answer(models.Model):
 
 
 class CustomUserManager(BaseUserManager):
+    
     def create_user(self, email, user_name, first_name, password, **other_fields):
 
         if not email:
@@ -37,6 +38,7 @@ class CustomUserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, user_name=user_name, first_name=first_name, **other_fields)
         user.set_password(password)
+        print('self.db just wanted to check what is it about => ', self.db)
         user.save()
         return user
     
@@ -51,22 +53,35 @@ class CustomUserManager(BaseUserManager):
         if other_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must be assigned to is_superuser=True')
 
+        # user = self.create_user(self, email, user_name, first_name, password)
+        # user.is_teacher = True
+        # user.is_superuser = True
+        # user.save(self.db)
+        # return user
+
         return self.create_user(self, email, user_name, first_name, password, **other_fields)
         
 
 class NewUser(AbstractBaseUser, PermissionsMixin):
+
     email = models.EmailField(_('email address'), unique=True)
     user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     start_date = models.DateTimeField(default=timezone.now)
-    about = models.TextField(_('about'), max_length=500, blank=True)
+    # The field below might not be necessary
+    # about = models.TextField(_('about'), max_length=500, blank=True)
     is_teacher = models.BooleanField(default=False)
 
+    objects = CustomUserManager()
+
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['user_name', 'email'] 
+    REQUIRED_FIELDS = ['user_name'] 
 
     def __str__(self) -> str:
         return self.user_name
+
+    def has_perm(self):
+        return self.is_teacher
 
 
 class UserScore(models.Model):
